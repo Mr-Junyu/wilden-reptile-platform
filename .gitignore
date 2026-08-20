@@ -53,3 +53,7 @@ next-env.d.ts
 
 # Claude AI
 .claude/
+
+# Source assets (large originals, not deployed)
+/assets-source/
+/temp/

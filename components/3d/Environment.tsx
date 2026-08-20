@@ -2,7 +2,7 @@
 
 import * as THREE from 'three'
 
-export function Environment() {
+export function Environment({ mobile = false }: { mobile?: boolean }) {
   return (
     <>
       {/* 环境光 - 提供基础照明 */}
@@ -13,9 +13,9 @@ export function Environment() {
         position={[8, 10, 6]}
         intensity={1.8}
         color="#FFF8E8"
-        castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        castShadow={!mobile}
+        shadow-mapSize-width={mobile ? 512 : 2048}
+        shadow-mapSize-height={mobile ? 512 : 2048}
         shadow-camera-far={50}
         shadow-camera-left={-10}
         shadow-camera-right={10}

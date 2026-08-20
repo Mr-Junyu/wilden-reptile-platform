@@ -1,6 +1,6 @@
 {
   "name": "reptile-hub",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
@@ -28,5 +28,8 @@
     "tailwindcss": "^3.4.7",
     "three": "^0.185.1",
     "typescript": "^7.0.2"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "^4.4.2"
   }
 }

@@ -33,8 +33,14 @@ export function Navigation() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-background-primary/80 backdrop-blur-sm border-b border-text-primary/5">
-      <div className="container mx-auto px-6 py-6">
-        <div className="flex items-center justify-between">
+      {/*
+        Same .wilden-container as Hero — this is what puts the WILDEN wordmark's
+        left edge on the exact same axis as the Hero H1 at every viewport width.
+        The bar row is sized to --nav-h so the variable is a measured fact rather
+        than an assumption Hero has to guess at.
+      */}
+      <div className="wilden-container">
+        <div className="flex items-center justify-between h-[var(--nav-h)]">
           {/* Logo */}
           <Link
             href="/"
@@ -93,7 +99,7 @@ export function Navigation() {
               : 'max-h-0 opacity-0 mt-0 pointer-events-none'
           }`}
         >
-          <div className="space-y-6 pb-2">
+          <div className="space-y-6 pb-8">
             <Link
               href="/explore"
               className="block text-text-primary text-sm tracking-wider hover:text-accent-sand transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-sand focus-visible:ring-offset-2 focus-visible:ring-offset-background-primary rounded-sm px-2 py-1"

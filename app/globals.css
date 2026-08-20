@@ -3,6 +3,29 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /*
+     * WILDEN layout tokens.
+     *
+     * --wilden-gutter is a continuous function of the viewport, not a stepped
+     * breakpoint value. Tailwind's default `container` snaps from 100% width to
+     * a fixed 768px at exactly 768px, which makes every element on the page jump
+     * sideways by tens of pixels on a 1px resize. These clamps never jump.
+     *   390px -> 16px   768px -> 27px   1440px -> 44px   1920px+ -> 48px (capped)
+     */
+    --wilden-gutter: clamp(1rem, 0.5rem + 2.5vw, 3rem);
+    --wilden-max: 1440px;
+
+    /*
+     * Navigation height. The nav bar row is sized to exactly this value (see
+     * Navigation.tsx), so Hero can reserve its safe area with
+     * padding-top: var(--nav-h) instead of guessing a hard-coded pt-24 / 89px.
+     * Change it here and both sides stay in sync.
+     *   390px -> 72px   1440px -> 86px   1920px+ -> 88px (capped)
+     */
+    --nav-h: clamp(4.5rem, 4rem + 1.5vw, 5.5rem);
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -20,6 +43,63 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /*
+   * The single horizontal reference frame for the site. Navigation and Hero both
+   * use it, which is what makes the WILDEN logo's left edge and the Hero H1's
+   * left edge land on the same axis at every viewport width.
+   */
+  .wilden-container {
+    width: 100%;
+    max-width: var(--wilden-max);
+    margin-inline: auto;
+    padding-inline: var(--wilden-gutter);
+  }
+
+  /*
+   * The copy column is a size container so the headline can size itself against
+   * the space it actually has, instead of against the viewport, which knows
+   * nothing about the two-column split.
+   */
+  .hero-copy {
+    container-type: inline-size;
+  }
+
+  /*
+   * Fluid Hero headline. Replaces the stepped text-5xl -> xl:text-9xl ramp, which
+   * changed size by ~24px at a single pixel of resize.
+   *
+   * Two terms, whichever is smaller:
+   *   1.7rem + 5.333vw  the viewport ramp, solved through (390, 48) and (1440, 104)
+   *   15.5cqi           a hard ceiling of 15.5% of the copy column's own width
+   *
+   * The cqi term is not decoration: "COMPANION" is ~6.3em wide in a bold grotesk,
+   * so a line only fits if font-size <= column / 6.3 (= 15.8cqi). Below 1024px the
+   * copy owns the full container and the viewport ramp wins; from 1024px up the
+   * column narrows to ~52% and the cqi ceiling takes over, so the headline is
+   * always the largest size that still fits on one line — at every width, with no
+   * media queries and no per-device values. If the column ratio is ever retuned,
+   * the type follows automatically.
+   *
+   * Measured: 390 -> 48   430 -> 50   768 -> 68   1024 -> 75   1280 -> 94
+   *           1440 -> 104   1920 -> 104 (held by the column, not the viewport)
+   *
+   * The first declaration is the no-container-query fallback; browsers that
+   * understand cqi override it with the second.
+   */
+  .hero-title {
+    font-size: clamp(3rem, 1.7rem + 5.333vw, 8rem);
+    font-size: clamp(3rem, min(1.7rem + 5.333vw, 15.5cqi), 8rem);
+    line-height: 0.95;
+  }
+
+  /* Same treatment for the supporting line: 390 -> 17px, 1440 -> 22px, cap 24px. */
+  .hero-subtitle {
+    font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.5rem);
+    line-height: 1.6;
   }
 }
 
