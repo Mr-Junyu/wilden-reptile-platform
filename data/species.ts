@@ -1,0 +1,88 @@
+import { Species } from '@/types/species'
+
+export const speciesData: Species[] = [
+  {
+    id: '1',
+    slug: 'leopard-gecko',
+    name: 'Leopard Gecko',
+    scientificName: 'Eublepharis macularius',
+    description: 'A docile, hardy gecko perfect for beginners. Known for their spotted pattern and easy care requirements.',
+    difficulty: 'beginner',
+    size: '7-10 inches',
+    lifespan: '10-20 years',
+    temperature: {
+      min: 75,
+      max: 90,
+    },
+    humidity: {
+      min: 30,
+      max: 40,
+    },
+    image: '/images/species/leopard-gecko.jpg',
+    accent: '#C4A57B',
+    tags: ['Nocturnal', 'Docile', 'Hardy', 'Ground-dwelling'],
+  },
+  {
+    id: '2',
+    slug: 'crested-gecko',
+    name: 'Crested Gecko',
+    scientificName: 'Correlophus ciliatus',
+    description: 'An arboreal gecko with a distinctive crest. Easy to care for and doesn\'t require special lighting.',
+    difficulty: 'beginner',
+    size: '6-9 inches',
+    lifespan: '15-20 years',
+    temperature: {
+      min: 72,
+      max: 78,
+    },
+    humidity: {
+      min: 50,
+      max: 70,
+    },
+    image: '/images/species/crested-gecko.jpg',
+    accent: '#8B7355',
+    tags: ['Arboreal', 'Low maintenance', 'Frugivorous', 'Handleable'],
+  },
+  {
+    id: '3',
+    slug: 'bearded-dragon',
+    name: 'Bearded Dragon',
+    scientificName: 'Pogona vitticeps',
+    description: 'A friendly, personable lizard that thrives on interaction. Popular for their calm temperament.',
+    difficulty: 'beginner',
+    size: '16-24 inches',
+    lifespan: '8-12 years',
+    temperature: {
+      min: 75,
+      max: 105,
+    },
+    humidity: {
+      min: 30,
+      max: 40,
+    },
+    image: '/images/species/bearded-dragon.jpg',
+    accent: '#D4A574',
+    tags: ['Diurnal', 'Social', 'Omnivore', 'Active'],
+  },
+  {
+    id: '4',
+    slug: 'ball-python',
+    name: 'Ball Python',
+    scientificName: 'Python regius',
+    description: 'A calm, non-aggressive snake ideal for first-time snake owners. Known for curling into a ball when stressed.',
+    difficulty: 'intermediate',
+    size: '3-5 feet',
+    lifespan: '20-30 years',
+    temperature: {
+      min: 78,
+      max: 88,
+    },
+    humidity: {
+      min: 50,
+      max: 60,
+    },
+    image: '/images/species/ball-python.jpg',
+    accent: '#A89080',
+    tags: ['Nocturnal', 'Calm', 'Carnivore', 'Low activity'],
+  },
+]
